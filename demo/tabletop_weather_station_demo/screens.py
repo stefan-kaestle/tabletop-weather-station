@@ -92,6 +92,7 @@ class IndoorScreen(Screen):
 
         last_value = self.tws.air_quality_last_value
         iaq_value = last_value.iaq_index
+        iaq_accuracy = last_value.iaq_index_accuracy
 
         temperature = '{0:.2f}'.format(last_value.temperature/100.0)
         temperature = ' '*(5 - len(temperature)) + temperature
@@ -115,6 +116,8 @@ class IndoorScreen(Screen):
             self.draw_icon(105, 29, icons.IconThumbsDown)
         else:
             self.draw_icon(105, 29, icons.IconHand)
+
+        self.lcd.draw_text(72, 30, self.lcd.FONT_6X8, self.lcd.COLOR_BLACK, '{0}'.format(iaq_accuracy))
 
     def touch_gesture(self, gesture, duration, pressure_max, x_start, x_end, y_start, y_end, age):
         pass
