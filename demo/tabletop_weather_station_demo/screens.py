@@ -108,11 +108,11 @@ class IndoorScreen(Screen):
         self.lcd.draw_text(68, 0,  self.lcd.FONT_6X16, self.lcd.COLOR_BLACK, pressure)
         self.lcd.draw_text(78, 30, self.lcd.FONT_6X16, self.lcd.COLOR_BLACK, iaq)
 
-        if iaq_value < 70:
+        if iaq_value < 100:
             self.draw_icon(105, 29, icons.IconThumbsUp)
-        elif iaq_value < 140:
+        elif iaq_value < 180:
             self.draw_icon(105, 29, icons.IconThumbsSide)
-        elif iaq_value < 210:
+        elif iaq_value < 260:
             self.draw_icon(105, 29, icons.IconThumbsDown)
         else:
             self.draw_icon(105, 29, icons.IconHand)
