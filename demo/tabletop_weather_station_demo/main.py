@@ -110,7 +110,7 @@ if gui:
             self.log_edit.centerCursor()
 
 class TabletopWeatherStation(object):
-    HOST = "localhost"
+    HOST = "192.168.178.121"
     PORT = 4223
 
     vdb = None
@@ -241,12 +241,13 @@ class TabletopWeatherStation(object):
                     self.air_quality = BrickletAirQuality(uid, self.ipcon)
 
                     # Update data once directly on initial enumerate
-                    self.cb_air_quality_all_values(*self.air_quality.get_all_values())
+                    if uid == 'JnL':
+                        self.cb_air_quality_all_values(*self.air_quality.get_all_values())
 
-                    self.air_quality.register_callback(self.air_quality.CALLBACK_ALL_VALUES, self.cb_air_quality_all_values)
-                    self.air_quality.set_all_values_callback_configuration(1000, False)
+                        self.air_quality.register_callback(self.air_quality.CALLBACK_ALL_VALUES, self.cb_air_quality_all_values)
+                        self.air_quality.set_all_values_callback_configuration(1000, False)
 
-                    log.info('Air Quality Bricklet initialized')
+                        log.info('Air Quality Bricklet initialized')
                 except Error as e:
                     log.error('Air Quality Bricklet init failed: ' + str(e.description))
                     self.air_quality = None
